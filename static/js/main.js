@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('choice-container').classList.add('hidden');
         document.getElementById('waiting-message').classList.remove('hidden');
         document.getElementById('chat-container').classList.add('hidden');
+        currentRoom = null;
     });
 
     socket.on('start_chat', (data) => {
@@ -82,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('chat-container').classList.add('hidden');
         document.getElementById('waiting-message').classList.remove('hidden');
         clearInterval(timer);
+        currentRoom = null;
+        socket.emit('join', { user_id: userId });
     });
 
     socket.on('chat_continued', () => {

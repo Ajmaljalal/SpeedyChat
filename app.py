@@ -16,7 +16,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_pre_ping": True,
 }
 app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a secure secret key
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 db.init_app(app)
 
@@ -35,6 +35,7 @@ def on_join(data):
     user_id = data['user_id']
     if user_id not in waiting_queue:
         waiting_queue.append(user_id)
+        join_room(user_id)  # Join the user to their own room
     check_and_create_pair()
 
 @socketio.on('message')
@@ -48,12 +49,13 @@ def on_leave(data):
     room = data['room']
     leave_room(room)
     if room in active_chats:
-        active_chats[room].remove(user_id)
+        if user_id in active_chats[room]:
+            active_chats[room].remove(user_id)
         if len(active_chats[room]) == 0:
             del active_chats[room]
         else:
             other_user = active_chats[room][0]
-            emit('partner_left', room=room)
+            emit('partner_left', room=other_user)
             waiting_queue.append(other_user)
     check_and_create_pair()
 
@@ -71,7 +73,8 @@ def check_and_create_pair():
         user1 = waiting_queue.pop(0)
         user2 = waiting_queue.pop(0)
         room = f"{user1}_{user2}"
-        join_room(room)
+        join_room(room, sid=user1)
+        join_room(room, sid=user2)
         active_chats[room] = [user1, user2]
         emit('start_chat', {'room': room}, room=room)
 
