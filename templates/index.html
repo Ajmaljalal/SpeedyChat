@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Speed Dating</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold mb-4 text-center">Virtual Speed Dating</h1>
+        
+        <div id="waiting-message" class="text-center mb-4">
+            <p>Waiting for a match... Please be patient.</p>
+        </div>
+
+        <div id="chat-container" class="bg-white rounded-lg shadow-md p-4 hidden">
+            <div id="timer-container" class="mb-4 text-center">
+                <p>Time remaining: <span id="timer" class="timer">01:00</span></p>
+            </div>
+
+            <div id="chat-messages" class="chat-container mb-4 p-2 border border-gray-300 rounded"></div>
+
+            <form id="chat-form" class="flex">
+                <input type="text" id="chat-input" class="flex-grow mr-2 p-2 border border-gray-300 rounded" placeholder="Type your message...">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+            </form>
+        </div>
+
+        <div id="choice-container" class="text-center mt-4 hidden">
+            <p>Do you want to continue chatting with this person?</p>
+            <button id="continue-btn" class="bg-green-500 text-white px-4 py-2 rounded mr-2">Continue</button>
+            <button id="next-btn" class="bg-red-500 text-white px-4 py-2 rounded">Next Person</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
