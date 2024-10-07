@@ -1,0 +1,73 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+2024-10-07 20:58:28,693 - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.196.51:5000
+2024-10-07 20:58:28,693 - INFO - Press CTRL+C to quit
+2024-10-07 20:58:29,157 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:29] "GET / HTTP/1.1" 200 -
+2024-10-07 20:58:29,261 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:29] "GET /static/css/styles.css HTTP/1.1" 304 -
+2024-10-07 20:58:29,470 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:29] "GET /static/js/main.js HTTP/1.1" 304 -
+2024-10-07 20:58:30,695 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:30] "GET /socket.io/?EIO=4&transport=polling&t=P9eniSA HTTP/1.1" 200 -
+2024-10-07 20:58:30,793 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:30] "POST /socket.io/?EIO=4&transport=polling&t=P9eniUq&sid=Owf-2O08Q90L96wXAAAA HTTP/1.1" 200 -
+2024-10-07 20:58:30,798 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:30] "GET /socket.io/?EIO=4&transport=polling&t=P9eniUs&sid=Owf-2O08Q90L96wXAAAA HTTP/1.1" 200 -
+2024-10-07 20:58:30,904 - DEBUG - User oyrht1mt5 attempting to join
+2024-10-07 20:58:30,904 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:30] "POST /socket.io/?EIO=4&transport=polling&t=P9eniWW&sid=Owf-2O08Q90L96wXAAAA HTTP/1.1" 200 -
+2024-10-07 20:58:30,904 - DEBUG - User oyrht1mt5 added to waiting queue. Queue size: 1
+2024-10-07 20:58:30,904 - DEBUG - Current waiting queue: ['oyrht1mt5']
+2024-10-07 20:58:30,904 - DEBUG - Checking for pairs. Waiting queue size: 1
+2024-10-07 20:58:30,904 - DEBUG - Current waiting queue before pairing: ['oyrht1mt5']
+2024-10-07 20:58:30,904 - DEBUG - Not enough users in the waiting queue to create a pair
+2024-10-07 20:58:30,904 - DEBUG - Current waiting queue after pairing: ['oyrht1mt5']
+2024-10-07 20:58:30,904 - DEBUG - Current active chats: {}
+2024-10-07 20:58:31,229 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:31] "GET /socket.io/?EIO=4&transport=polling&t=P9eniWW.0&sid=Owf-2O08Q90L96wXAAAA HTTP/1.1" 200 -
+2024-10-07 20:58:44,192 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "GET / HTTP/1.1" 200 -
+2024-10-07 20:58:44,315 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "GET /static/css/styles.css HTTP/1.1" 304 -
+2024-10-07 20:58:44,414 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "GET /static/js/main.js HTTP/1.1" 304 -
+2024-10-07 20:58:44,508 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "GET /socket.io/?EIO=4&transport=polling&t=P9enlrB HTTP/1.1" 200 -
+2024-10-07 20:58:44,624 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "POST /socket.io/?EIO=4&transport=polling&t=P9enlsq&sid=BljBIql9dSmOx315AAAC HTTP/1.1" 200 -
+2024-10-07 20:58:44,653 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "GET /socket.io/?EIO=4&transport=polling&t=P9enlsq.0&sid=BljBIql9dSmOx315AAAC HTTP/1.1" 200 -
+2024-10-07 20:58:44,758 - DEBUG - User yu2jxkr2z attempting to join
+2024-10-07 20:58:44,758 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:44] "POST /socket.io/?EIO=4&transport=polling&t=P9enlu_&sid=BljBIql9dSmOx315AAAC HTTP/1.1" 200 -
+2024-10-07 20:58:44,759 - DEBUG - User yu2jxkr2z added to waiting queue. Queue size: 2
+2024-10-07 20:58:44,759 - DEBUG - Current waiting queue: ['oyrht1mt5', 'yu2jxkr2z']
+2024-10-07 20:58:44,759 - DEBUG - Checking for pairs. Waiting queue size: 2
+2024-10-07 20:58:44,759 - DEBUG - Current waiting queue before pairing: ['oyrht1mt5', 'yu2jxkr2z']
+2024-10-07 20:58:44,759 - DEBUG - Creating pair: oyrht1mt5 and yu2jxkr2z in room oyrht1mt5_yu2jxkr2z
+Exception in thread Thread-23 (_handle_event_internal):
+Traceback (most recent call last):
+  File "/nix/store/f98g7xbckgqbkagdvpzc2r6lv3h1p9ki-python3-3.11.9/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/nix/store/f98g7xbckgqbkagdvpzc2r6lv3h1p9ki-python3-3.11.9/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/socketio/server.py", line 589, in _handle_event_internal
+    r = server._trigger_event(data[0], namespace, sid, *data[1:])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/socketio/server.py", line 614, in _trigger_event
+    return handler(*args)
+           ^^^^^^^^^^^^^^
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/flask_socketio/__init__.py", line 293, in _handler
+    return self._handle_event(handler, message, real_ns, sid,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/flask_socketio/__init__.py", line 838, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+  File "/home/runner/SpeedyChat/app.py", line 49, in on_join
+    check_and_create_pair()
+  File "/home/runner/SpeedyChat/app.py", line 94, in check_and_create_pair
+    join_room(room, sid=user1)
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/flask_socketio/__init__.py", line 1046, in join_room
+    socketio.server.enter_room(sid, room, namespace=namespace)
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/socketio/server.py", line 285, in enter_room
+    self.manager.enter_room(sid, namespace, room)
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/socketio/manager.py", line 72, in enter_room
+    return self.basic_enter_room(sid, namespace, room, eio_sid=eio_sid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/socketio/base_manager.py", line 112, in basic_enter_room
+    eio_sid = self.rooms[namespace][None][sid]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/runner/SpeedyChat/.pythonlibs/lib/python3.11/site-packages/bidict/_base.py", line 524, in __getitem__
+    return self._fwdm[key]
+           ~~~~~~~~~~^^^^^
+KeyError: 'oyrht1mt5'
+2024-10-07 20:58:45,038 - INFO - 172.31.196.51 - - [07/Oct/2024 20:58:45] "GET /socket.io/?EIO=4&transport=polling&t=P9enlu_.0&sid=BljBIql9dSmOx315AAAC HTTP/1.1" 200 -

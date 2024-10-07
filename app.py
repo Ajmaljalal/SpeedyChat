@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
@@ -30,6 +30,7 @@ with app.app_context():
 
 waiting_queue = []
 active_chats = {}
+user_sid_map = {}  # New dictionary to store user_id to sid mapping
 
 @app.route('/')
 def index():
@@ -38,7 +39,9 @@ def index():
 @socketio.on('join')
 def on_join(data):
     user_id = data['user_id']
-    logger.debug(f"User {user_id} attempting to join")
+    sid = request.sid
+    logger.debug(f"User {user_id} attempting to join with sid {sid}")
+    user_sid_map[user_id] = sid  # Store the mapping
     if user_id not in waiting_queue:
         waiting_queue.append(user_id)
         join_room(user_id)  # Join the user to their own room
@@ -91,12 +94,17 @@ def check_and_create_pair():
         user2 = waiting_queue.pop(0)
         room = f"{user1}_{user2}"
         logger.debug(f"Creating pair: {user1} and {user2} in room {room}")
-        join_room(room, sid=user1)
-        join_room(room, sid=user2)
-        active_chats[room] = [user1, user2]
-        logger.debug(f"Emitting start_chat event to room {room}")
-        emit('start_chat', {'room': room}, to=room)
-        logger.debug(f"Emitted start_chat event to room {room}")
+        try:
+            join_room(room, sid=user_sid_map.get(user1))
+            join_room(room, sid=user_sid_map.get(user2))
+            active_chats[room] = [user1, user2]
+            logger.debug(f"Emitting start_chat event to room {room}")
+            emit('start_chat', {'room': room}, to=room)
+            logger.debug(f"Emitted start_chat event to room {room}")
+        except Exception as e:
+            logger.error(f"Error joining room: {e}")
+            # If there's an error, add the users back to the waiting queue
+            waiting_queue.extend([user1, user2])
     else:
         logger.debug("Not enough users in the waiting queue to create a pair")
     logger.debug(f"Current waiting queue after pairing: {waiting_queue}")
