@@ -104,13 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.appendChild(messageElement);
     });
 
-    // Add a connection event listener
     socket.on('connect', () => {
         console.log('Connected to server');
     });
 
-    // Add a disconnection event listener
     socket.on('disconnect', () => {
         console.log('Disconnected from server');
+    });
+
+    socket.on('error', (error) => {
+        console.error('Socket error:', error);
     });
 });

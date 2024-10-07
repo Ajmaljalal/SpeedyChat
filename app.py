@@ -7,7 +7,7 @@ from sqlalchemy.orm import DeclarativeBase
 import random
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class Base(DeclarativeBase):
@@ -45,6 +45,7 @@ def on_join(data):
         logger.debug(f"User {user_id} added to waiting queue. Queue size: {len(waiting_queue)}")
     else:
         logger.debug(f"User {user_id} already in waiting queue")
+    logger.debug(f"Current waiting queue: {waiting_queue}")
     check_and_create_pair()
 
 @socketio.on('message')
@@ -68,6 +69,7 @@ def on_leave(data):
             other_user = active_chats[room][0]
             emit('partner_left', to=other_user)
             waiting_queue.append(other_user)
+    logger.debug(f"Current waiting queue after leave: {waiting_queue}")
     check_and_create_pair()
 
 @socketio.on('continue_chat')
@@ -83,6 +85,7 @@ def continue_chat(data):
 
 def check_and_create_pair():
     logger.debug(f"Checking for pairs. Waiting queue size: {len(waiting_queue)}")
+    logger.debug(f"Current waiting queue before pairing: {waiting_queue}")
     if len(waiting_queue) >= 2:
         user1 = waiting_queue.pop(0)
         user2 = waiting_queue.pop(0)
@@ -93,6 +96,7 @@ def check_and_create_pair():
         active_chats[room] = [user1, user2]
         emit('start_chat', {'room': room}, to=room)
         logger.debug(f"Emitted start_chat event to room {room}")
+    logger.debug(f"Current waiting queue after pairing: {waiting_queue}")
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
