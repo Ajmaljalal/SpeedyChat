@@ -30,7 +30,7 @@ with app.app_context():
 
 waiting_queue = []
 active_chats = {}
-user_sid_map = {}  # New dictionary to store user_id to sid mapping
+user_sid_map = {}  # Dictionary to store user_id to sid mapping
 
 @app.route('/')
 def index():
@@ -93,7 +93,8 @@ def check_and_create_pair():
         user1 = waiting_queue.pop(0)
         user2 = waiting_queue.pop(0)
         room = f"{user1}_{user2}"
-        logger.debug(f"Creating pair: {user1} and {user2} in room {room}")
+        logger.debug(f"Attempting to pair users {user1} and {user2}")
+        logger.debug(f"user1 sid: {user_sid_map.get(user1)}, user2 sid: {user_sid_map.get(user2)}")
         try:
             join_room(room, sid=user_sid_map.get(user1))
             join_room(room, sid=user_sid_map.get(user2))
@@ -101,9 +102,11 @@ def check_and_create_pair():
             logger.debug(f"Emitting start_chat event to room {room}")
             emit('start_chat', {'room': room}, to=room)
             logger.debug(f"Emitted start_chat event to room {room}")
+        except KeyError as e:
+            logger.error(f'KeyError in check_and_create_pair: {e}')
+            waiting_queue.extend([user1, user2])
         except Exception as e:
-            logger.error(f"Error joining room: {e}")
-            # If there's an error, add the users back to the waiting queue
+            logger.error(f'Error in check_and_create_pair: {e}')
             waiting_queue.extend([user1, user2])
     else:
         logger.debug("Not enough users in the waiting queue to create a pair")
