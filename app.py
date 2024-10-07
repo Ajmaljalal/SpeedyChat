@@ -96,6 +96,8 @@ def check_and_create_pair():
         active_chats[room] = [user1, user2]
         emit('start_chat', {'room': room}, to=room)
         logger.debug(f"Emitted start_chat event to room {room}")
+    else:
+        logger.debug("Not enough users in the waiting queue to create a pair")
     logger.debug(f"Current waiting queue after pairing: {waiting_queue}")
 
 if __name__ == '__main__':
