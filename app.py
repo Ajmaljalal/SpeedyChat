@@ -94,11 +94,13 @@ def check_and_create_pair():
         join_room(room, sid=user1)
         join_room(room, sid=user2)
         active_chats[room] = [user1, user2]
+        logger.debug(f"Emitting start_chat event to room {room}")
         emit('start_chat', {'room': room}, to=room)
         logger.debug(f"Emitted start_chat event to room {room}")
     else:
         logger.debug("Not enough users in the waiting queue to create a pair")
     logger.debug(f"Current waiting queue after pairing: {waiting_queue}")
+    logger.debug(f"Current active chats: {active_chats}")
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
